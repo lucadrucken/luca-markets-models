@@ -2,8 +2,7 @@
 
 _Luca Druckenmueller_
 
-This project contains implementations of classical financial models I learned during my studies.
-It is a **work in progress** and will be continuously extended with further tools and applications.
+Collection of Python tools and notebooks implementing pricing and hedging models used in capital markets, including a delta hedging use case.
 ---
 
 ## Installation
