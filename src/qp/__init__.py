@@ -7,6 +7,12 @@ from .performance import (
     sharpe,
 )
 
+from .portfolio import (
+    accrue_cash,
+    rebalance_delta_hedge,
+    hedge_portfolio_value,
+)
+
 from .fixed_income import (
     bond_price,
     macaulay_duration,
@@ -29,6 +35,9 @@ __all__ = [
     "sharpe",
     "var_historical",
     "es_historical",
+    "accrue_cash",
+    "rebalance_delta_hedge",
+    "hedge_portfolio_value",
     "bond_price",
     "macaulay_duration",
     "modified_duration",

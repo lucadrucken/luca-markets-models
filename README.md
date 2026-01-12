@@ -1,15 +1,23 @@
-﻿# Quant-Notebooks & Tools
+﻿# Luca Markets Models – Derivatives, Hedging & Risk
 
-_Luca Druckenmueller_
+_Luca Druckenmüller_
 
-Collection of Python tools and notebooks implementing pricing and hedging models used in capital markets, including a delta hedging use case.
+This repository contains quantitative finance tools and notebooks focused on **derivatives pricing, hedging strategies and risk analysis** in a global markets and trading desk context.
+
+
+Main focus:
+- Discrete delta hedging of European options (including transaction costs & model risk)
+- Option pricing (Black–Scholes, Binomial)
+- Fixed income analytics (duration, convexity)
+- Risk & performance metrics (VaR, ES, Sharpe)
+
 ---
 
 ## Installation
 
 ```bash
-git clone https://github.com/lucadrucken/quant-playground.git
-cd quant-playground
+git clone https://github.com/lucadrucken/luca-markets-models.git
+cd luca-markets-models
 pip install -r requirements.txt
 # installs qp as well because of '-e .' → all models available via top-level imports
 ```
@@ -17,6 +25,23 @@ pip install -r requirements.txt
 ---
 
 ## Quickstart
+
+### Delta Hedging – Discrete Replication of a Sold European Call
+
+The notebook `01_delta_hedging.ipynb` simulates the discrete delta hedging of a short European call option under Black–Scholes.
+
+It analyzes:
+- Daily vs. weekly rebalancing
+- Volatility mis-specification (model risk)
+- Transaction costs
+- Distribution of terminal hedging error (VaR, ES, MSHE)
+
+Key outputs:
+- Underlying GBM paths
+- Option value vs. hedging portfolio value
+- Hedging error distributions
+- Risk vs. cost trade-offs
+
 
 ### Performance
 
@@ -99,6 +124,11 @@ pytest -q
 ### Performance
 - `sharpe(returns, risk_free, periods_per_year)` – Annualized Sharpe Ratio
 
+### Portfolio (Hedging)
+- `accrue_cash(B, r, dt)` – Accrues the cash account at the risk-free rate
+- `rebalance_delta_hedge(B, delta_old, delta_new, S, tc_per_dollar=0.0)` – Executes delta hedge rebalancing including transaction costs
+- `hedge_portfolio_value(option_value, option_qty, delta, S, B)` – Computes the value of the self-financing hedging portfolio
+
 ### Fixed Income
 - `bond_price(face_value, maturity, coupon_rate, ytm, freq)` – Price of a fixed coupon bond
 - `macaulay_duration(...)` – Weighted average time to receive cashflows
@@ -118,12 +148,9 @@ pytest -q
 ## Project Structure
 
 ```
-QUANT-PLAYGROUND/
+LUCA-MARKETS-MODELS/
 ├── notebooks/                   
-│   ├── 00_notebook.ipynb        # general playground
-│   ├── 01_risk_demo.ipynb       # risk metrics demo
-│   ├── 02_vol_scenarios.ipynb   # vol scenarios (pricing & greeks)
-│   └── 03_delta_hedging.ipynb   # delta hedging of sold european call
+│   └── 01_delta_hedging.ipynb   # delta hedging of sold european call
 │  
 ├── src/qp/                      # main package (all models)
 │   ├── __init__.py
@@ -134,11 +161,7 @@ QUANT-PLAYGROUND/
 │   └── risk.py                  
 │
 ├── tests/                       # pytest unit tests
-│   ├── test_derivatives.py
-│   ├── test_fixed_income.py
-│   ├── test_performance.py
-│   └── test_risk.py
-│
+│  
 ├── requirements.txt             # dependencies
 ├── pyproject.toml               
 ├── README.md
